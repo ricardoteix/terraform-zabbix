@@ -14,7 +14,7 @@ output "projeto-ip" {
 }
 
 output "elb-dns" {
-  value = aws_lb.projeto-elb.dns_name
+  value = var.has-domain ? aws_lb.projeto-elb[0].dns_name : null
 }
 
 output "projeto-rds-nome-banco" {
@@ -41,25 +41,8 @@ output "server" {
   value = "http://${aws_instance.projeto.public_dns}/info.php"
 }
 
-output "projeto-efs_id" {
-  value = aws_efs_file_system.projeto-efs.id
-}
-
-output "nome-bucket" {
-  value = var.nome-bucket
-}
-
 output "projeto-user-data-script" {
   value = data.template_file.projeto-user-data-script.rendered
-}
-
-output "s3-user-id" {
-  value = aws_iam_access_key.s3_user_key.id
-}
-
-output "s3-user-secret" {
-  value = aws_iam_access_key.s3_user_key.secret
-  sensitive = true
 }
 
 output "domain" {

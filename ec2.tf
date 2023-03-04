@@ -3,7 +3,6 @@
  data "template_file" "projeto-user-data-script" {
   template = file(var.arquivo-user-data)
   vars = {
-    efs_id = aws_efs_file_system.projeto-efs.id
     region = "${var.regiao}",
     sns_topic_arn = aws_sns_topic.projeto-events.arn,
     rds_addr = aws_db_instance.projeto-rds.address,
@@ -48,6 +47,7 @@ resource "aws_instance" "projeto" {
 }
 
 resource "aws_lb" "projeto-elb" {
+  count = var.has-domain ? 1 : 0
   name               = "projeto-lb"
   internal           = false
   load_balancer_type = "application"
@@ -66,6 +66,7 @@ resource "aws_lb" "projeto-elb" {
 }
 
 resource "aws_lb_target_group" "tg-projeto" {
+  count = var.has-domain ? 1 : 0
   # for_each  = [aws_lb.projeto-elb.name]
   name     = "tg-projeto"
   target_type   = "instance"
@@ -84,32 +85,47 @@ resource "aws_lb_target_group" "tg-projeto" {
 
 # Attach the target group for "test" ALB
 resource "aws_lb_target_group_attachment" "tg_attachment_projeto-elb" {
-    target_group_arn = aws_lb_target_group.tg-projeto.arn
+    count = var.has-domain ? 1 : 0
+    target_group_arn = aws_lb_target_group.tg-projeto[count.index].arn  # aws_lb_target_group.tg-projeto.arn
     target_id        = aws_instance.projeto.id
     port             = 80
 }
 
 # Listener rule for HTTP traffic on each of the ALBs
 resource "aws_lb_listener" "lb_listener_http" {
-  load_balancer_arn    = aws_lb.projeto-elb.arn
+  count = var.has-domain ? 1 : 0
+  load_balancer_arn    = aws_lb.projeto-elb[count.index].arn # aws_lb.projeto-elb.arn
   port                 = "80"
   protocol             = "HTTP"
+  
   default_action {
-    target_group_arn = aws_lb_target_group.tg-projeto.arn
+    target_group_arn = aws_lb_target_group.tg-projeto[count.index].arn # aws_lb_target_group.tg-projeto.arn
     type             = "forward"
   }
+  
+  # default_action {
+  #   type = "redirect"
+
+  #   redirect {
+  #     port        = "443"
+  #     protocol    = "HTTPS"
+  #     status_code = "HTTP_301"
+  #   }
+  # }
+
 }
 
 # Listener rule for HTTPs traffic on "test" ALB
 resource "aws_lb_listener" "lb_listner_https" {
+  count = var.has-domain ? 1 : 0
   # for_each  = [aws_lb.projeto-elb.name]
-  load_balancer_arn = aws_lb.projeto-elb.arn
+  load_balancer_arn = aws_lb.projeto-elb[count.index].arn # aws_lb.projeto-elb.arn
   port              = "443"
   protocol          = "HTTPS"
   ssl_policy        = "ELBSecurityPolicy-2016-08"
   certificate_arn   = var.has-domain ? var.certificate-arn : ""  # Testar 
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.tg-projeto.arn
+    target_group_arn = aws_lb_target_group.tg-projeto[count.index].arn # aws_lb_target_group.tg-projeto.arn
   }
 }

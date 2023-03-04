@@ -1,0 +1,46 @@
+# Renomeie este arquivo, ou crie outro, com nome terraform.tfvars
+# Depois adicione os valores desejados para as variáveis abaixo.
+# Isto evitará que sejam solicitados valores para estas variávies 
+# quando forem executados os comandos do terraform.
+
+# Nome do profile criado com AWS CLI com as
+# credenciais do IAM.
+profile = "ESPECIFIQUE O SEU"
+
+# Especifique o nome da chave pem para associar a instância
+ec2-chave-instancia = "NOME DA CHAVE"
+
+# Ubuntu 22.04
+ec2-ami = "ami-0557a15b87f6559cf"
+
+# 2 vCPU, 1 GB
+ec2-tipo-instancia="t3a.micro" 
+
+rds-identificador = "zabbix"
+rds-nome-usuario = "zabbix"
+rds-senha-usuario = "Zabi20230224"
+rds-nome-banco = "zabbix"
+rds-tipo-instancia = "db.t3.micro"
+rds-publicly-accessible = true
+
+# Assim que iniciar o processo, você receberá um email
+# autorizando o SNS. Aceite!
+# Você receberá um email quando finalizar a instalação
+sns-email="seuemail@emai.com"
+
+# ARN do Certificado SSL
+# certificate-arn="arn:aws:acm:us-east-1:CONTA AWS:certificate/ID CERTIFICADO"
+
+# Se tem um domínio no Route53 especifique aqui
+# e informe a zona e o subdomínio a ser criado.
+# Se definir has-domain
+has-domain=false
+domain="" # subdominio para criar
+route53-zone = ""
+
+# Especifique o nome da tag padrão utilizada nos nomes dos serviços
+tag-base = "zabbix"
+
+# Especifique o nome do arquivo para carregar no user_data
+# caso deseje um diferente do padrão.
+arquivo-user-data = "projeto_user_data.sh"

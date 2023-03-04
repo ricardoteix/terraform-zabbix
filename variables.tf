@@ -23,7 +23,7 @@ variable "tag-base" {
 variable "certificate-arn" {
   description = "ARN do certificado no Certificate Manager"
   type        = string
-  # Espefique o valor desta variáel no arquivoterraform.tfvars
+  default = "" # Espefique o valor desta variáel no arquivo terraform.tfvars
 }
 
 variable "ec2-ami" {
@@ -118,12 +118,10 @@ variable "sns-email" {
   # Veja o arquivo terraform.tfvars.exemplo para definir um valor fixo para esta variável.
 }
 
-# S3
-
-variable "nome-bucket" {
-  description = "Nome do bucket para configurar no Projeto"
-  type = string
-  default = "projeto-files"  # Como o bucket deve ser unico em toda a AWS, sugiro modifica este nome para evitar conflito.
+variable "has-domain" {
+  description = "Indica se deve criar o domínio especificado no Route53"
+  type = bool
+  default = false
 }
 
 variable "domain" {
@@ -135,16 +133,5 @@ variable "domain" {
 variable "route53-zone" {
   description = "ID da zona do domínio no Route 53"
   type = string
-}
-
-variable "create-domain-www" {
-  description = "Indica o record www no Route53"
-  type = bool
-  default = false
-}
-
-variable "has-domain" {
-  description = "Indica se deve criar o domínio especificado no Route53"
-  type = bool
-  default = false
+  default = ""
 }

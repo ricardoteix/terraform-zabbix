@@ -48,9 +48,11 @@ sudo systemctl enable zabbix-server zabbix-agent apache2
 
 echo '##### INSTALANDO O AWS CLI #####'
 
+sudo apt-get install -y unzip 
+
 cd /home/ubuntu
-curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-unzip awscliv2.zip
+sudo curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+sudo unzip awscliv2.zip
 sudo ./aws/install
 
 echo '############### Publicando SNS ################'
