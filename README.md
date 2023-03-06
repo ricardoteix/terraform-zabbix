@@ -1,9 +1,9 @@
 # Intro
 
 Este projeto permite criar a infraestrutura mínima na AWS para execução de carga de trabalho baseada em uma única instância EC2.
-A proposta é criar todos os recursos necessários, como VPC, Subnet, Route Tables, EC2, RDS, S3 etc, para rodar um projeto em uma instância Ubuntu, 20.04 LTS. 
+A proposta é criar todos os recursos necessários, como VPC, Subnet, Route Tables, EC2, RDS etc, para rodar um projeto em uma instância Ubuntu, 22.04 LTS. 
 
-O projeto a ser executado neste exemplo é apenas um servidor web Apache com PHP.
+O projeto a ser executado neste exemplo é o Zabbix.
 
 Toda a infraestrutura será criada via Terraform.
 
@@ -136,3 +136,4 @@ Mesmo proporcionando a criação dos recursos mínimos para execução do projet
 1. [Terraform](https://www.terraform.io/)
 2. [How to setup a basic VPC with EC2 and RDS using Terraform](https://dev.to/rolfstreefkerk/how-to-setup-a-basic-vpc-with-ec2-and-rds-using-terraform-3jij)
 3. [Variáveis Terraform para Packer](https://stackoverflow.com/questions/58054772/how-to-set-a-packer-variable-from-a-terraform-state)
+3. [Zabbix](https://www.zabbix.com/download)
