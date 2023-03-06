@@ -28,10 +28,6 @@ mysql -h ${db_host} -u${db_user} -p${db_password} -Bse "drop database ${db_name}
 #  Cria o banco novamente com collate correto
 mysql -h ${db_host} -u${db_user} -p${db_password} -Bse "create database zabbix character set utf8mb4 collate utf8mb4_bin;"
 
-# db_password=Zabi20230224
-# db_user=zabbix
-# db_host=zabbix.cmfcq1p7msvt.us-east-1.rds.amazonaws.com
-
 # Define as credenciais do banco
 sudo sed -i 's/# DBPassword=/DBPassword=${db_password}/g' /etc/zabbix/zabbix_server.conf
 sudo sed -i 's/DBName=zabbix/DBName=${db_name}/g' /etc/zabbix/zabbix_server.conf
