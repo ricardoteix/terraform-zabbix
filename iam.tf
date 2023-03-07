@@ -51,3 +51,38 @@ resource "aws_iam_role_policy" "projeto-policy" {
 }
 EOF
 }
+
+resource "aws_iam_user" "zabbix-user" {
+  name = "zabbix-user"
+  
+  tags = {
+    Name = "${var.tag-base}-zabbix-user"
+  }
+}
+
+resource "aws_iam_user_policy" "zabbix-user-policy" {
+  name = "zabbix-user-policy"
+  user = aws_iam_user.zabbix-user.name
+    
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": [
+        "cloudwatch:Describe*",
+        "cloudwatch:Get*",
+        "cloudwatch:List*",
+        "ec2:Describe*"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}
+EOF
+}
+
+resource "aws_iam_access_key" "zabbix-user-key" {
+  user = aws_iam_user.zabbix-user.name
+}

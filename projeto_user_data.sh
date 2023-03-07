@@ -38,6 +38,8 @@ sudo sed -i 's/# DBHost=localhost/DBHost=${db_host}/g' /etc/zabbix/zabbix_server
 # Executa o script de preparacao do banco
 sudo zcat /usr/share/zabbix-sql-scripts/mysql/server.sql.gz | mysql --default-character-set=utf8mb4 -h ${db_host} -u${db_user} -p${db_password} zabbix
 
+sudo echo "<?php phpinfo();" | sudo tee /var/www/html/info.php
+
 # Reinicia o apache
 sudo systemctl restart zabbix-server zabbix-agent apache2
 sudo systemctl enable zabbix-server zabbix-agent apache2
