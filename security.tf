@@ -134,3 +134,48 @@ resource "aws_security_group" "sg_projeto_elb" {
     Name = "sg-${var.tag-base}-elb"
   }
 }
+
+# Zabbix
+
+resource "aws_security_group" "zabbix_client" {
+  name = "sg_zabbix_client"
+  description= "sg_zabbix_client"
+  vpc_id = aws_vpc.vpc-projeto.id
+
+  ingress {
+    security_groups = [aws_security_group.zabbix_server.id]
+    from_port = 10050
+    to_port = 10051
+    protocol = "tcp"
+  }     
+      
+  egress {
+    security_groups = [aws_security_group.zabbix_server.id]
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+  }
+
+  tags = {
+    Name = "sg-zabbix-client"
+  }
+}
+
+
+resource "aws_security_group" "zabbix_server" {
+  name = "sg_zabbix_server"
+  description= "sg_zabbix_server"
+  vpc_id = aws_vpc.vpc-projeto.id
+      
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
+
+  tags = {
+    Name = "sg-zabbix-server"
+  }
+}

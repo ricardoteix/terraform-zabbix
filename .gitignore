@@ -7,7 +7,7 @@ temp/
 image/
 
 # Terraform
-
+*.zip
 package.json
 
 # Local .terraform directories

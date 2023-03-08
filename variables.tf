@@ -1,5 +1,10 @@
 # Arquivo com a definição das variáveis. O arquivo poderia ter qualquer outro nome, ex. valores.tf
 
+variable "conta-aws" {
+  description = "ID da conta AWS"
+  type        = string
+}
+
 variable "regiao" {
   description = "Região da AWS para provisionamento"
   type        = string
@@ -10,6 +15,25 @@ variable "profile" {
   description = "Profile com as credenciais criadas no IAM"
   type = string
   default = "ricardoteixcloud"
+}
+
+# Zabbix
+
+variable "zabbix-host" {
+  description = "Nome utilizado para nomenclaruras no projeto"
+  type        = string
+}
+
+variable "zabbix-login" {
+  description = "Nome utilizado para nomenclaruras no projeto"
+  type        = string
+  default     = "Admin"
+}
+
+variable "zabbix-password" {
+  description = "Nome utilizado para nomenclaruras no projeto"
+  type        = string
+  default     = "zabbix"
 }
 
 variable "tag-base" {
