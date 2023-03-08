@@ -3,6 +3,13 @@
 # Isto evitará que sejam solicitados valores para estas variávies 
 # quando forem executados os comandos do terraform.
 
+zabbix-host = "https://zabbix.eldoom.tk/zabbix/"
+zabbix-login = "Admin"
+zabbix-password = "zabbix"
+
+# ID da conta AWS
+conta-aws = "012345678901"
+
 # Nome do profile criado com AWS CLI com as
 # credenciais do IAM.
 profile = "ESPECIFIQUE O SEU"
@@ -33,7 +40,6 @@ sns-email="seuemail@emai.com"
 
 # Se tem um domínio no Route53 especifique aqui
 # e informe a zona e o subdomínio a ser criado.
-# Se definir has-domain
 has-domain=false
 domain="" # subdominio para criar
 route53-zone = ""
