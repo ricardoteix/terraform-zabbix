@@ -18,17 +18,16 @@ ssm_commands_amz2 = """
 """
 
 secret_name = os.environ.get('SECRET_NAME')
+session = boto3.Session()
+
+#### Configurações para uso na maquina local ###
 if secret_name is None:
     secret_name = 'zabbix-user-key'
 
-profile = None
 if __name__ == "__main__":
     profile = 'ricardoteixcloud'
-
-session = boto3.Session()
-if profile is not None:
     session = boto3.Session(profile_name='ricardoteixcloud')
-
+################################################
 
 def lambda_handler(event, context):
 
@@ -191,6 +190,7 @@ def add_zabbix_host(url, user, password, user_key_id, user_key_secret, ec2_ip, h
     return result_create
 
 
+#### Configurações para uso na maquina local ###
 evt = {
     "version": "0",
     "id": "adbc2f0a-36d1-6700-61a3-7a0d26b26280",
@@ -211,3 +211,4 @@ evt = {
 
 if __name__ == "__main__":
     lambda_handler(evt, {})
+################################################
