@@ -1,14 +1,3 @@
-
-# Cria uma função Lambda chamada "zabbix-add-host"
-# resource "aws_lambda_function" "zabbix-add-host" {
-#   function_name = "zabbix-add-host"
-#   handler       = "index.lambda_handler"
-#   role         = aws_iam_role.zabbix-lambda-role.arn
-#   publish       = true
-#   runtime      = "python3.9"
-#   filename     = "zabbix-add-host.zip"  # nome do arquivo ZIP contendo o código da função
-# }
-
 # Faz upload do código da função Lambda para a AWS
 resource "aws_lambda_function" "zabbix-add-host" {
     function_name = "zabbix-add-host"
@@ -175,10 +164,3 @@ resource "aws_cloudwatch_event_target" "zabbix_add_host_lambda_target" {
   rule = aws_cloudwatch_event_rule.detect-ec2-instance-rule.name
   arn = aws_lambda_function.zabbix-add-host.arn
 }
-
-# Cria um trigger para a função Lambda que executa a cada vez que uma nova mensagem é enviada para uma fila SQS
-# resource "aws_lambda_event_source_mapping" "sqs_trigger" {
-#   event_source_arn  = aws_sqs_queue.zabbix-add-host_queue.arn
-#   function_name     = aws_lambda_function.zabbix-add-host.function_name
-#   batch_size        = 1
-#   starting_position = "latest
