@@ -1,4 +1,4 @@
-# Intro
+# Introdução
 
 Este projeto permite criar a infraestrutura mínima na AWS para execução de carga de trabalho baseada em uma única instância EC2.
 A proposta é criar todos os recursos necessários, como VPC, Subnet, Route Tables, EC2, RDS etc, para rodar um projeto em uma instância Ubuntu, 22.04 LTS. 
@@ -6,6 +6,18 @@ A proposta é criar todos os recursos necessários, como VPC, Subnet, Route Tabl
 O projeto a ser executado neste exemplo é o Zabbix.
 
 Toda a infraestrutura será criada via Terraform.
+
+## Inclusão automática de hosts
+
+Além de criaro EC2 e RDS com Zabbix, neste exemplo temos a automação de inclusão de instâncias como hosts do Zabbix. Isso quer dizer que, quando uma nova instância for criada na mesma região e vpc prevista neste exemplo, ela será incluída no Zabbix recém instalado por meio da Zabbix API utilizada via Python.
+
+Para isso alguns recursos necessarios foram criados como:
+
+- Função Lambda para que é executada ao subir a instância;
+- Secret no Secrets Manager para armazenar credenciais e outros dados necessários;
+- Security Groups adicionais para o Zabbix Agent;
+- Profiles IAM para dar permissão à Lambda;
+- Recursos do Terraform para compactar e subir a função Lambda.
 
 # Terraform
 
