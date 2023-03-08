@@ -40,6 +40,7 @@ sns-email="seuemail@emai.com"
 
 # Se tem um domínio no Route53 especifique aqui
 # e informe a zona e o subdomínio a ser criado.
+# Defina has-domain como true
 has-domain=false
 domain="" # subdominio para criar
 route53-zone = ""
