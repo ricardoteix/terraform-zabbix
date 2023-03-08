@@ -136,6 +136,26 @@ projeto-rds-endpoint = "projeto-rds.cmfcq1p7msvt.us-east-1.rds.amazonaws.com:330
 server = "http://ec2-44-201-145-193.compute-1.amazonaws.com/info.php"
 ```
 
+## Recebendo notificação de implantação
+
+Neste código nós também criamos recursos do SNS para 
+notificar quando a implantação foi feita com sucesso.
+
+No arquivo de .tfvars você deve especificar o email
+no qual deseja receber a notificação do final da 
+implantação.
+
+Fique atento para confirmar a inscrição do seu email
+no tópico SNS. Pouco após você executar o *apply* você
+receberá um email com o assunto **AWS Notification - Subscription Confirmation** e você deve clicar no
+*Confirm subscription*.
+
+Após isso você deverá receber um email quando toda a 
+implantação do Zabbix ocorrer. Observe que isso ocorre
+após o script *user data* finalizar a instação de tudo
+não apenas quando o Terraform terminar de subir a infra.
+Pode demorar um pouco mais do que esta parte. 
+
 ---
 
 # Considerações finais
