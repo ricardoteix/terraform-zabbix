@@ -9,7 +9,7 @@ Toda a infraestrutura será criada via Terraform.
 
 ## Inclusão automática de hosts
 
-Além de criaro EC2 e RDS com Zabbix, neste exemplo temos a automação de inclusão de instâncias como hosts do Zabbix. Isso quer dizer que, quando uma nova instância for criada na mesma região e vpc prevista neste exemplo, ela será incluída no Zabbix recém instalado por meio da Zabbix API utilizada via Python.
+Além de criar o EC2 e RDS com Zabbix, neste exemplo temos a automação de inclusão de instâncias como hosts do Zabbix. Isso quer dizer que, quando uma nova instância for criada na mesma região e vpc prevista neste exemplo, ela será incluída no Zabbix recém instalado por meio da Zabbix API utilizada via Python.
 
 Para isso alguns recursos necessarios foram criados como:
 
@@ -48,7 +48,7 @@ O arquivo de definição do Terraform é o *main.tf*.
 ```
 provider "aws" {
   region = "us-east-1"
-  profile = "oficina-de-projetos"
+  profile = "projeto"
 }
 ```
 
@@ -76,7 +76,7 @@ Todas as variáveis possíveis para este arquivo podem ser vistas no arquivo ``v
 
 ## Aplicando a infra definida
 
-O Terraform provê alguns comandos básicos para planejar, aplicar e destroir a infraestrutura. 
+O Terraform provê alguns comandos básicos para planejar, aplicar e destruir a infraestrutura. 
 
 Ao começar a aplicar a infraestrutura, o Terraform cria o arquivo ``terraform.tfstate``, que deve ser preservado e não deve ser alterado manualmente.
 
